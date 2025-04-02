@@ -141,11 +141,24 @@ class ExportDeclaration implements ExportDeclarationInterface
     }
 
     /**
-     * @param ExportLineItems[] $exportLineItems
+     * @param ExportLineItem[] $exportLineItems
      * @return ExportDeclaration
      */
     public function setExportLineItems(array $exportLineItems): ExportDeclaration {
-        $this->ExportLineItems = new ExportLineItems($exportLineItems);
+        $wrappedItems = [];
+
+        foreach ($exportLineItems as $item) {
+            $wrappedItems[] = new \SoapVar($item, SOAP_ENC_OBJECT, null, null, 'ExportLineItem');
+        }
+
+        $this->ExportLineItems = new \SoapVar(
+            $wrappedItems,
+            SOAP_ENC_OBJECT,
+            null,
+            null,
+            'ExportLineItems'
+        );
+
         return $this;
     }
 
