@@ -15,6 +15,7 @@ use Dhl\Express\Api\Data\Request\Shipment\ShipmentDetailsInterface;
 use Dhl\Express\Api\Data\Request\Shipment\ShipperInterface;
 use Dhl\Express\Api\Data\ShipmentRequestInterface;
 use Dhl\Express\Model\Request\Recipient;
+use Dhl\Express\Model\Request\Shipment\Broker;
 use Dhl\Express\Model\Request\Shipment\Buyer;
 use Dhl\Express\Model\Request\Shipment\Shipper;
 use Dhl\Express\Webservice\Soap\Type\Common\SpecialServices;
@@ -52,6 +53,11 @@ class ShipmentRequest implements ShipmentRequestInterface
      * @var Buyer
      */
     private $buyer;
+
+    /**
+     * @var Broker
+     */
+    private $broker;
 
     /**
      * @var PackageInterface[]
@@ -103,7 +109,8 @@ class ShipmentRequest implements ShipmentRequestInterface
         ShipperInterface $shipper,
         RecipientInterface $recipient,
         array $packages,
-        Buyer $buyer = null
+        Buyer $buyer = null,
+        Broker $broker = null
     )
     {
         $this->shipmentDetails = $shipmentDetails;
@@ -111,6 +118,7 @@ class ShipmentRequest implements ShipmentRequestInterface
         $this->shipper = $shipper;
         $this->recipient = $recipient;
         $this->buyer = $buyer;
+        $this->broker = $broker;
         $this->packages = $packages;
     }
 
@@ -137,6 +145,11 @@ class ShipmentRequest implements ShipmentRequestInterface
     public function getBuyer(): ?BuyerInterface
     {
         return $this->buyer;
+    }
+
+    public function getBroker(): ?Broker
+    {
+        return $this->broker;
     }
 
     public function getPackages(): array

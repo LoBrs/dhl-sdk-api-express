@@ -98,6 +98,23 @@ class ShipmentRequestMapper
             );
         }
 
+        $brokerContactInfo = null;
+        if ($request->getBroker()) {
+            $brokerContactInfo = new Ship\BuyerContactInfo(
+                new Ship\Contact(
+                    $request->getBroker()->getName(),
+                    $request->getBroker()->getCompany(),
+                    $request->getBroker()->getPhone()
+                ),
+                new Ship\BuyerAddress(
+                    $request->getBroker()->getStreetLines()[0],
+                    $request->getBroker()->getCity(),
+                    $request->getBroker()->getPostalCode(),
+                    $request->getBroker()->getCountryCode()
+                )
+            );
+        }
+
         $recipientContactInfo = new Ship\ContactInfo(
             new Ship\Contact(
                 $request->getRecipient()->getName(),
@@ -147,7 +164,8 @@ class ShipmentRequestMapper
             new Ship(
                 $shipperContactInfo,
                 $recipientContactInfo,
-                $buyerContactInfo
+                $buyerContactInfo,
+                $brokerContactInfo
             ),
             new Packages(
                 $this->mapPackages($request->getPackages())

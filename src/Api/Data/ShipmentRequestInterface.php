@@ -14,6 +14,7 @@ use Dhl\Express\Api\Data\Request\Shipment\DangerousGoods\DryIceInterface;
 use Dhl\Express\Api\Data\Request\Shipment\LabelOptionsInterface;
 use Dhl\Express\Api\Data\Request\Shipment\ShipmentDetailsInterface;
 use Dhl\Express\Api\Data\Request\Shipment\ShipperInterface;
+use Dhl\Express\Model\Request\Shipment\Broker;
 use Dhl\Express\Model\Request\Shipment\Buyer;
 use Dhl\Express\Webservice\Soap\Type\ShipmentRequest\InternationalDetail\ExportDeclaration\ExportDeclaration;
 
@@ -58,6 +59,11 @@ interface ShipmentRequestInterface
      * @return ?BuyerInterface
      */
     public function getBuyer(): ?BuyerInterface;
+
+    /**
+     * @return ?Broker
+     */
+    public function getBroker(): ?Broker;
 
     /**
      * @return RecipientInterface

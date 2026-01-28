@@ -10,6 +10,7 @@ use Dhl\Express\Api\ShipmentRequestBuilderInterface;
 use Dhl\Express\Model\Request\Insurance;
 use Dhl\Express\Model\Request\Package;
 use Dhl\Express\Model\Request\Recipient;
+use Dhl\Express\Model\Request\Shipment\Broker;
 use Dhl\Express\Model\Request\Shipment\Buyer;
 use Dhl\Express\Model\Request\Shipment\DangerousGoods\DryIce;
 use Dhl\Express\Model\Request\Shipment\LabelOptions;
@@ -368,6 +369,31 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
         return $this;
     }
 
+    public function setBroker(
+        string $countryCode,
+        string $postalCode,
+        string $city,
+        array  $streetLines,
+        string $name,
+        string $company,
+        string $phone,
+        string $email = null
+    ): ShipmentRequestBuilderInterface
+    {
+        $this->data['broker'] = [
+            'countryCode' => $countryCode,
+            'postalCode' => $postalCode,
+            'city' => $city,
+            'streetLines' => $streetLines,
+            'name' => $name,
+            'company' => $company,
+            'phone' => $phone,
+            'email' => $email,
+        ];
+
+        return $this;
+    }
+
     public function addPackage(
         int    $sequenceNumber,
         float  $weight,
@@ -504,6 +530,20 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
             );
         }
 
+        $broker = null;
+        if (isset($this->data['broker']) && !empty($this->data['broker'])) {
+            $broker = new Broker(
+                $this->data['broker']['countryCode'],
+                $this->data['broker']['postalCode'],
+                $this->data['broker']['city'],
+                $this->data['broker']['streetLines'],
+                $this->data['broker']['name'],
+                $this->data['broker']['company'],
+                $this->data['broker']['phone'],
+                $this->data['broker']['email']
+            );
+        }
+
         if (isset($this->data['recipient']['registrationNumbers']) && !empty($this->data['recipient']['registrationNumbers'])) {
             foreach ($this->data['recipient']['registrationNumbers'] as $registrationNumberData) {
                 $recipient->setRegistrationNumber(
@@ -536,7 +576,8 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
             $shipper,
             $recipient,
             $packages,
-            $buyer
+            $buyer,
+            $broker
         );
 
         if (!empty($this->data['billingAccountNumber'])) {

@@ -49,6 +49,13 @@ class Ship
     private $Buyer;
 
     /**
+     * The broker contact info.
+     *
+     * @var BuyerContactInfo
+     */
+    private $Broker;
+
+    /**
      * The recipient contact info.
      *
      * @var ContactInfo
@@ -62,12 +69,15 @@ class Ship
      * @param ContactInfo $recipient The recipient contact info
      * @param ?BuyerContactInfo $buyer The buyer contact info (optional)
      */
-    public function __construct(ContactInfo $shipper, ContactInfo $recipient, ?BuyerContactInfo $buyer = null)
+    public function __construct(ContactInfo $shipper, ContactInfo $recipient, ?BuyerContactInfo $buyer = null, ?BuyerContactInfo $broker = null)
     {
         $this->setShipper($shipper)
              ->setRecipient($recipient);
         if ($buyer) {
             $this->setBuyer($buyer);
+        }
+        if ($broker) {
+            $this->setBroker($broker);
         }
     }
 
@@ -151,6 +161,16 @@ class Ship
     }
 
     /**
+     * Returns the buyer contact info.
+     *
+     * @return BuyerContactInfo
+     */
+    public function getBroker()
+    {
+        return $this->Broker;
+    }
+
+    /**
      * Sets the buyer contact info.
      *
      * @param BuyerContactInfo $contactInfo The buyer contact info
@@ -160,6 +180,19 @@ class Ship
     public function setBuyer(BuyerContactInfo $contactInfo)
     {
         $this->Buyer = $contactInfo;
+        return $this;
+    }
+
+    /**
+     * Sets the broker contact info.
+     *
+     * @param BuyerContactInfo $contactInfo The buyer contact info
+     *
+     * @return self
+     */
+    public function setBroker(BuyerContactInfo $contactInfo)
+    {
+        $this->Broker = $contactInfo;
         return $this;
     }
 
