@@ -329,6 +329,16 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
         return $this;
     }
 
+    public function setBrokerRegistrationNumber(string $registrationNumber, string $registrationTypeCode): ShipmentRequestBuilderInterface
+    {
+        $this->data['broker']['registrationNumbers'][] = [
+            'registrationNumber' => $registrationNumber,
+            'registrationTypeCode' => $registrationTypeCode,
+        ];
+
+        return $this;
+    }
+
     public function setRecipient(
         string $countryCode,
         string $postalCode,
