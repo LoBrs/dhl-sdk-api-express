@@ -6,6 +6,8 @@
 namespace Dhl\Express\Model\Request\Shipment;
 
 use Dhl\Express\Api\Data\Request\Shipment\BuyerInterface;
+use Dhl\Express\Webservice\Soap\Type\Common\Ship\RegistrationNumber;
+use Dhl\Express\Webservice\Soap\Type\ShipmentRequest\Ship\RegistrationNumbers;
 
 /**
  * Shipper.
@@ -70,6 +72,11 @@ class Buyer implements BuyerInterface
      * @var string|null
      */
     private $email;
+
+    /**
+     * @var RegistrationNumbers
+     */
+    private $registrationNumbers;
 
     /**
      * Shipper constructor.
@@ -142,5 +149,22 @@ class Buyer implements BuyerInterface
     public function getEmail()
     {
         return (string)$this->email;
+    }
+
+    public function setRegistrationNumber($number, $numberTypeCode, $countryCode)
+    {
+        $registrationNumber = new RegistrationNumber($number, $numberTypeCode, $countryCode);
+        if (!$this->registrationNumbers) {
+            $this->registrationNumbers = new RegistrationNumbers($registrationNumber);
+        } else {
+            $this->registrationNumbers->setRegistrationNumber(
+                $registrationNumber
+            );
+        }
+    }
+
+    public function getRegistrationNumbers()
+    {
+        return $this->registrationNumbers;
     }
 }

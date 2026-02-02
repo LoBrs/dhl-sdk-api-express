@@ -94,7 +94,8 @@ class ShipmentRequestMapper
                     $request->getBuyer()->getCity(),
                     $request->getBuyer()->getPostalCode(),
                     $request->getBuyer()->getCountryCode()
-                )
+                ),
+                $request->getBuyer()->getRegistrationNumbers()
             );
         }
 
@@ -111,7 +112,8 @@ class ShipmentRequestMapper
                     $request->getBroker()->getCity(),
                     $request->getBroker()->getPostalCode(),
                     $request->getBroker()->getCountryCode()
-                )
+                ),
+                $request->getBroker()->getRegistrationNumbers()
             );
         }
 

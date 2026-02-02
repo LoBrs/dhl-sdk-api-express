@@ -319,6 +319,16 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
         return $this;
     }
 
+    public function setBuyerRegistrationNumber(string $registrationNumber, string $registrationTypeCode): ShipmentRequestBuilderInterface
+    {
+        $this->data['buyer']['registrationNumbers'][] = [
+            'registrationNumber' => $registrationNumber,
+            'registrationTypeCode' => $registrationTypeCode,
+        ];
+
+        return $this;
+    }
+
     public function setRecipient(
         string $countryCode,
         string $postalCode,
@@ -516,6 +526,16 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
             $this->data['recipient']['email']
         );
 
+        if (isset($this->data['recipient']['registrationNumbers']) && !empty($this->data['recipient']['registrationNumbers'])) {
+            foreach ($this->data['recipient']['registrationNumbers'] as $registrationNumberData) {
+                $recipient->setRegistrationNumber(
+                    $registrationNumberData['registrationNumber'],
+                    $registrationNumberData['registrationTypeCode'],
+                    $registrationNumberData['registrationCountryCode'] ?? $this->data['recipient']['countryCode']
+                );
+            }
+        }
+
         $buyer = null;
         if (isset($this->data['buyer']) && !empty($this->data['buyer'])) {
             $buyer = new Buyer(
@@ -528,6 +548,16 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
                 $this->data['buyer']['phone'],
                 $this->data['buyer']['email']
             );
+        }
+
+        if (isset($this->data['buyer']['registrationNumbers']) && !empty($this->data['buyer']['registrationNumbers'])) {
+            foreach ($this->data['buyer']['registrationNumbers'] as $registrationNumberData) {
+                $buyer->setRegistrationNumber(
+                    $registrationNumberData['registrationNumber'],
+                    $registrationNumberData['registrationTypeCode'],
+                    $registrationNumberData['registrationCountryCode'] ?? $this->data['buyer']['countryCode']
+                );
+            }
         }
 
         $broker = null;
@@ -544,12 +574,12 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
             );
         }
 
-        if (isset($this->data['recipient']['registrationNumbers']) && !empty($this->data['recipient']['registrationNumbers'])) {
-            foreach ($this->data['recipient']['registrationNumbers'] as $registrationNumberData) {
-                $recipient->setRegistrationNumber(
+        if (isset($this->data['broker']['registrationNumbers']) && !empty($this->data['broker']['registrationNumbers'])) {
+            foreach ($this->data['broker']['registrationNumbers'] as $registrationNumberData) {
+                $broker->setRegistrationNumber(
                     $registrationNumberData['registrationNumber'],
                     $registrationNumberData['registrationTypeCode'],
-                    $registrationNumberData['registrationCountryCode'] ?? $this->data['recipient']['countryCode']
+                    $registrationNumberData['registrationCountryCode'] ?? $this->data['broker']['countryCode']
                 );
             }
         }

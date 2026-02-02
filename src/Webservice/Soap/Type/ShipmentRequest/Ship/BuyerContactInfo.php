@@ -13,14 +13,4 @@ namespace Dhl\Express\Webservice\Soap\Type\ShipmentRequest\Ship;
  */
 class BuyerContactInfo extends ContactInfo
 {
-    /**
-     * Constructor.
-     *
-     * @param Contact $contact The buyer contact
-     * @param Address $address The buyer address
-     */
-    public function __construct(Contact $contact, Address $address)
-    {
-        parent::__construct($contact, $address, null);
-    }
 }
