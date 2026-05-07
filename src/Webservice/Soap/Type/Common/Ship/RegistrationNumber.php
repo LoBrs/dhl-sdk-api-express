@@ -4,6 +4,7 @@ namespace Dhl\Express\Webservice\Soap\Type\Common\Ship;
 
 class RegistrationNumber
 {
+
     /** @var string */
     var $Number;
 
