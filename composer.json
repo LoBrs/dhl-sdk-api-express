@@ -1,6 +1,6 @@
 {
     "name": "boreal/sdk-api-express",
-    "version": "2.2.9",
+    "version": "2.2.10",
     "description": "Fork from dhl/sdk-api-express. API communication to the DHL Express web services.",
     "type": "library",
     "license": "MIT",
