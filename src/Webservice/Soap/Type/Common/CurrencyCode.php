@@ -43,6 +43,10 @@ class CurrencyCode implements ValueInterface
         $this->value = $value;
     }
 
+    public function getValue() {
+        return $this->value;
+    }
+
     /**
      * Returns the value as string.
      *

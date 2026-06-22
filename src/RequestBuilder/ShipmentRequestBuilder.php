@@ -207,6 +207,13 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
         return $this;
     }
 
+    public function setCustomsValueCurrencyCode(string $customsValueCurrencyCode): ShipmentRequestBuilderInterface
+    {
+        $this->data['customsValueCurrencyCode'] = $customsValueCurrencyCode;
+
+        return $this;
+    }
+
     public function setServiceType(string $serviceType): ShipmentRequestBuilderInterface
     {
         $this->data['serviceType'] = $serviceType;
@@ -491,7 +498,8 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
             $this->data['currencyCode'],
             $this->data['description'],
             $this->data['customsValue'],
-            $this->data['serviceType']
+            $this->data['serviceType'],
+            $this->data['customsValueCurrencyCode'] ?? 'EUR'
         );
 
         if (isset($this->data['paperlessDocument'])) {

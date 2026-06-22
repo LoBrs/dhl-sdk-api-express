@@ -179,9 +179,10 @@ class ExportDeclaration implements ExportDeclarationInterface
         float $netWeight,
         float $grossWeight,
         int $quantity,
-        string $quantityUOM
+        string $quantityUOM,
+        string $currency
     ): ExportDeclaration {
-        $item = new ExportLineItem($number, $description, $unitPrice, $netWeight, $grossWeight, $quantity, $quantityUOM);
+        $item = new ExportLineItem($number, $description, $unitPrice, $netWeight, $grossWeight, $quantity, $quantityUOM, $currency);
         $this->ExportLineItems->addExportLine($item);
         return $this;
     }

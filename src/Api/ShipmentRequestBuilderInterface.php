@@ -88,6 +88,14 @@ interface ShipmentRequestBuilderInterface
      */
     public function setCustomsValue(float $customsValue): ShipmentRequestBuilderInterface;
 
+    /**
+     * Sets the customs value.
+     *
+     * @param string $customsValue
+     *
+     * @return ShipmentRequestBuilderInterface
+     */
+    public function setCustomsValueCurrencyCode(string $customsValueCurrencyCode): ShipmentRequestBuilderInterface;
 
     /**
      * Sets Export declaration.

@@ -2,6 +2,7 @@
 
 namespace Dhl\Express\Webservice\Soap\Type\ShipmentRequest\InternationalDetail\ExportDeclaration\ExportLineItems;
 
+use Dhl\Express\Webservice\Soap\Type\Common\CurrencyCode;
 use Dhl\Express\Webservice\Soap\Type\ShipmentRequest\InternationalDetail\ExportDeclaration\RequestTaxesPaid;
 
 class ExportLineItem
@@ -75,6 +76,9 @@ class ExportLineItem
     /** @var float */
     private $UnitPrice;
 
+    /** @var string */
+    private $UnitPriceCurrencyCode = 'USD';
+
     /** @var float */
     private $NetWeight;
 
@@ -94,12 +98,14 @@ class ExportLineItem
         float   $netWeight,
         float   $grossWeight,
         int     $quantity,
-        string  $quantityUOM = self::UOM_QUANTITY_PCS
+        string  $quantityUOM = self::UOM_QUANTITY_PCS,
+        string  $unitPriceCurrencyCode = 'EUR'
     )
     {
         $this->setItemNumber($number);
         $this->setItemDescription($description);
         $this->setUnitPrice($unitPrice);
+        $this->setUnitPriceCurrencyCode($unitPriceCurrencyCode);
         $this->setNetWeight($netWeight);
         $this->setGrossWeight($grossWeight);
         $this->setQuantity($quantity);
@@ -241,12 +247,31 @@ class ExportLineItem
     }
 
     /**
+     * @return string
+     */
+    public function getUnitPriceCurrencyCode(): string
+    {
+        return $this->UnitPriceCurrencyCode;
+    }
+
+    /**
      * @param float $UnitPrice
      * @return ExportLineItem
      */
     public function setUnitPrice(float $UnitPrice): ExportLineItem
     {
         $this->UnitPrice = $UnitPrice;
+        return $this;
+    }
+
+
+    /**
+     * @param string $currencyCode
+     * @return ExportLineItem
+     */
+    public function setUnitPriceCurrencyCode(string $currencyCode): ExportLineItem
+    {
+        $this->UnitPriceCurrencyCode = new CurrencyCode($currencyCode);
         return $this;
     }
 

@@ -41,6 +41,7 @@ class ShipmentRequestBuilderTest extends \PHPUnit\Framework\TestCase
             ->setCurrency($currencyCode = 'EUR')
             ->setDescription($description = 'a description.')
             ->setCustomsValue($customsValue = 1.0)
+            ->setCustomsValueCurrencyCode('USD')
             ->setExportDeclaration($exportDeclaration)
             ->setServiceType($serviceType = 'U')
             ->setPayerAccountNumber($accountNumber = 'XXXXXXX')

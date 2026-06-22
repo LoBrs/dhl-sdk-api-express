@@ -78,6 +78,13 @@ interface ShipmentDetailsInterface
     public function getCustomsValue();
 
     /**
+     * Returns the customs value currency code.
+     *
+     * @return string
+     */
+    public function getCustomsValueCurrencyCode();
+
+    /**
      * Returns the service type.
      *
      * @return string

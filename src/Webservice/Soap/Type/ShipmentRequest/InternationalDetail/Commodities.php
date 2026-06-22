@@ -4,6 +4,7 @@
  */
 namespace Dhl\Express\Webservice\Soap\Type\ShipmentRequest\InternationalDetail;
 
+use Dhl\Express\Webservice\Soap\Type\Common\CurrencyCode;
 use Dhl\Express\Webservice\Soap\Type\Common\Ship\Address\CountryCode;
 use Dhl\Express\Webservice\Soap\Type\ShipmentRequest\InternationalDetail\Commodities\CustomsValue;
 use Dhl\Express\Webservice\Soap\Type\ShipmentRequest\InternationalDetail\Commodities\Description;
@@ -63,6 +64,13 @@ class Commodities
      * @var null|CustomsValue
      */
     private $CustomsValue;
+
+    /**
+     * The customs value currency.
+     *
+     * @var CurrencyCode
+     */
+    private $CustomsValueCurrencyCode;
 
     /**
      * The USFilingTypeValue is used for the US AES4, FTR and ITN numbers to be printed on the transport label.
@@ -216,6 +224,29 @@ class Commodities
     public function setCustomsValue($customsValue)
     {
         $this->CustomsValue = new CustomsValue($customsValue);
+        return $this;
+    }
+
+    /**
+     * Returns the customs value currency code.
+     *
+     * @return CurrencyCode|null
+     */
+    public function getCustomsValueCurrencyCode()
+    {
+        return $this->CustomsValueCurrencyCode;
+    }
+
+    /**
+     * Sets the customs value.
+     *
+     * @param string $customsValueCurrencyCode The customs value currency
+     *
+     * @return self
+     */
+    public function setCustomsValueCurrencyCode($customsValueCurrencyCode)
+    {
+        $this->CustomsValueCurrencyCode = new CurrencyCode($customsValueCurrencyCode);
         return $this;
     }
 

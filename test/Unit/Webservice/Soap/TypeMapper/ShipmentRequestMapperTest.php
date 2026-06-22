@@ -45,7 +45,8 @@ class ShipmentRequestMapperTest extends TestCase
             $currencyCode = 'EUR',
             $description = 'a description.',
             $customsValue = 1.0,
-            $serviceType = 'U'
+            $serviceType = 'U',
+            $customsValueCurrencyCode = 'USD'
         );
 
         $payerAccountNumber = 'XXXXXXXXX';
@@ -177,6 +178,11 @@ class ShipmentRequestMapperTest extends TestCase
         self::assertEquals(
             $customsValue,
             $soapRequest->getRequestedShipment()->getInternationalDetail()->getCommodities()->getCustomsValue()->getValue()
+        );
+
+        self::assertEquals(
+            $customsValueCurrencyCode,
+            $soapRequest->getRequestedShipment()->getInternationalDetail()->getCommodities()->getCustomsValueCurrencyCode()->getValue()
         );
 
         self::assertEquals(
