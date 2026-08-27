@@ -41,6 +41,13 @@ class Billing
     private $BillingAccountNumber;
 
     /**
+     * The DHL account number used to pay duties and taxes.
+     *
+     * @var null|Account
+     */
+    private $DutyAndTaxPayerAccountNumber;
+
+    /**
      * Constructor.
      *
      * @param string $shipperAccountNumber The shipper account number
@@ -134,6 +141,29 @@ class Billing
     public function setBillingAccountNumber($billingAccountNumber)
     {
         $this->BillingAccountNumber = new Account($billingAccountNumber);
+        return $this;
+    }
+
+    /**
+     * Returns the duty and tax payer account number.
+     *
+     * @return null|Account
+     */
+    public function getDutyAndTaxPayerAccountNumber()
+    {
+        return $this->DutyAndTaxPayerAccountNumber;
+    }
+
+    /**
+     * Sets the duty and tax payer account number.
+     *
+     * @param string $accountNumber The duty and tax payer account number
+     *
+     * @return self
+     */
+    public function setDutyAndTaxPayerAccountNumber($accountNumber)
+    {
+        $this->DutyAndTaxPayerAccountNumber = new Account($accountNumber);
         return $this;
     }
 }

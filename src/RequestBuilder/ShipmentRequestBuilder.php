@@ -228,6 +228,13 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
         return $this;
     }
 
+    public function setDutyAndTaxPayerAccountNumber(string $accountNumber): ShipmentRequestBuilderInterface
+    {
+        $this->data['dutyAndTaxPayerAccountNumber'] = $accountNumber;
+
+        return $this;
+    }
+
     public function setInsurance(float $insuranceValue, string $insuranceCurrency): ShipmentRequestBuilderInterface
     {
         $this->data['insurance'] = [
@@ -622,6 +629,10 @@ class ShipmentRequestBuilder implements ShipmentRequestBuilderInterface
 
         if (!empty($this->data['billingAccountNumber'])) {
             $request->setBillingAccountNumber($this->data['billingAccountNumber']);
+        }
+
+        if (!empty($this->data['dutyAndTaxPayerAccountNumber'])) {
+            $request->setDutyAndTaxPayerAccountNumber($this->data['dutyAndTaxPayerAccountNumber']);
         }
 
         if (isset($this->data['specialServices'])) {

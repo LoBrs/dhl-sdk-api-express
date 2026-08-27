@@ -206,13 +206,17 @@ class ShipmentRequestMapper
             ? Billing\ShippingPaymentType::R
             : Billing\ShippingPaymentType::S;
 
-        $requestedShipment->getShipmentInfo()->setBilling(
-            new Billing(
-                $request->getPayerAccountNumber(),
-                $shippingPaymentType,
-                $request->getBillingAccountNumber()
-            )
+        $billing = new Billing(
+            $request->getPayerAccountNumber(),
+            $shippingPaymentType,
+            $request->getBillingAccountNumber()
         );
+
+        if ($request->getDutyAndTaxPayerAccountNumber()) {
+            $billing->setDutyAndTaxPayerAccountNumber($request->getDutyAndTaxPayerAccountNumber());
+        }
+
+        $requestedShipment->getShipmentInfo()->setBilling($billing);
 
         $requestedShipment->getInternationalDetail()->setContent(
             $request->getShipmentDetails()->getContentType()

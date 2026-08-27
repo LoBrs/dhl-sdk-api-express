@@ -126,6 +126,7 @@ class ShipmentRequestMapperTest extends TestCase
         );
 
         $request->setBillingAccountNumber('123456789');
+        $request->setDutyAndTaxPayerAccountNumber($dutyAndTaxPayerAccountNumber = '987654321');
 
         $request->setInsurance($insurance)
             ->setDryIce($dryIce);
@@ -197,6 +198,11 @@ class ShipmentRequestMapperTest extends TestCase
         self::assertEquals(
             '123456789',
             $soapRequest->getRequestedShipment()->getShipmentInfo()->getBilling()->getBillingAccountNumber()
+        );
+
+        self::assertEquals(
+            $dutyAndTaxPayerAccountNumber,
+            $soapRequest->getRequestedShipment()->getShipmentInfo()->getBilling()->getDutyAndTaxPayerAccountNumber()
         );
 
         /**

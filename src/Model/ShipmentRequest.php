@@ -70,6 +70,11 @@ class ShipmentRequest implements ShipmentRequestInterface
     private $billingAccountNumber;
 
     /**
+     * @var null|string
+     */
+    private $dutyAndTaxPayerAccountNumber;
+
+    /**
      * @var null|InsuranceInterface
      */
     private $insurance;
@@ -162,6 +167,11 @@ class ShipmentRequest implements ShipmentRequestInterface
         return (string)$this->billingAccountNumber;
     }
 
+    public function getDutyAndTaxPayerAccountNumber(): string
+    {
+        return (string)$this->dutyAndTaxPayerAccountNumber;
+    }
+
     public function getInsurance(): ?InsuranceInterface
     {
         return $this->insurance;
@@ -187,6 +197,20 @@ class ShipmentRequest implements ShipmentRequestInterface
     public function setBillingAccountNumber(string $billingAccountNumber): ShipmentRequestInterface
     {
         $this->billingAccountNumber = $billingAccountNumber;
+
+        return $this;
+    }
+
+    /**
+     * Sets the duty and tax payer account number.
+     *
+     * @param string $dutyAndTaxPayerAccountNumber The duty and tax payer account number
+     *
+     * @return ShipmentRequest
+     */
+    public function setDutyAndTaxPayerAccountNumber(string $dutyAndTaxPayerAccountNumber): ShipmentRequestInterface
+    {
+        $this->dutyAndTaxPayerAccountNumber = $dutyAndTaxPayerAccountNumber;
 
         return $this;
     }

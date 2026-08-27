@@ -94,7 +94,8 @@ class ShipmentRequestTest extends TestCase
         );
 
         $shipmentRequest->setInsurance($insurance)
-            ->setDryIce($dryIce);
+            ->setDryIce($dryIce)
+            ->setDutyAndTaxPayerAccountNumber($dutyAndTaxPayerAccountNumber = '123456789');
 
         self::assertInstanceOf(ShipmentRequestInterface::class, $shipmentRequest);
         self::assertSame($shipmentDetails, $shipmentRequest->getShipmentDetails());
@@ -104,5 +105,6 @@ class ShipmentRequestTest extends TestCase
         self::assertSame($recipient, $shipmentRequest->getRecipient());
         self::assertSame($packages, $shipmentRequest->getPackages());
         self::assertSame($dryIce, $shipmentRequest->getDryIce());
+        self::assertSame($dutyAndTaxPayerAccountNumber, $shipmentRequest->getDutyAndTaxPayerAccountNumber());
     }
 }

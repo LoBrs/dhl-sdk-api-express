@@ -126,6 +126,15 @@ interface ShipmentRequestBuilderInterface
     public function setBillingAccountNumber(string $accountNumber): ShipmentRequestBuilderInterface;
 
     /**
+     * Sets the duty and tax payer account number.
+     *
+     * @param string $accountNumber
+     *
+     * @return ShipmentRequestBuilderInterface
+     */
+    public function setDutyAndTaxPayerAccountNumber(string $accountNumber): ShipmentRequestBuilderInterface;
+
+    /**
      * Sets the insurance.
      *
      * @param float $insuranceValue

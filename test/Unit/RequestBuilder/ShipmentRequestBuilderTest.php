@@ -44,6 +44,7 @@ class ShipmentRequestBuilderTest extends \PHPUnit\Framework\TestCase
             ->setExportDeclaration($exportDeclaration)
             ->setServiceType($serviceType = 'U')
             ->setPayerAccountNumber($accountNumber = 'XXXXXXX')
+            ->setDutyAndTaxPayerAccountNumber($dutyAndTaxPayerAccountNumber = '123456789')
             ->setInsurance($insuranceValue = 99.99, $insuranceCurrency = 'EUR')
             ->setShipper(
                 $countryCode = 'DE',
@@ -146,6 +147,7 @@ class ShipmentRequestBuilderTest extends \PHPUnit\Framework\TestCase
         );
 
         self::assertEquals($accountNumber, $request->getPayerAccountNumber());
+        self::assertEquals($dutyAndTaxPayerAccountNumber, $request->getDutyAndTaxPayerAccountNumber());
 
         self::assertEquals(new Insurance(
             $insuranceValue,
